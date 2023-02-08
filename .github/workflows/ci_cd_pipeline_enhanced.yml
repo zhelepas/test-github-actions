@@ -25,9 +25,9 @@ jobs:
       - name: Run Tests
         run: mvn clean test
 
-    print-status:
-      name: Printing Status Enhanced
-      runs-on: ubuntu-latest
-      steps:
-        - name: Print Status
-          run: echo "Status"
+  print-status:
+    name: Printing Status Enhanced
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Status
+        run: echo "Status"
