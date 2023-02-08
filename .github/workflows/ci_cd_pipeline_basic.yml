@@ -28,18 +28,18 @@ jobs:
 
       - name: Build
         id: build
-        run: mvn -B package --file pom.xml
+        run: mvn clean compile
+
+      - name: Run Tests
+        id: test
+        run: |
+          mvn clean test
 
       - name: Check filename
         id: check_filename
         run: |
           cd target
           echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV
-
-      - name: Run Tests
-        id: test
-        run: |
-          mvn clean test
     outputs:
       filename: ${{ env.FILENAME }}
 

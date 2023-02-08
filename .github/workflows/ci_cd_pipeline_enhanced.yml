@@ -25,18 +25,18 @@ jobs:
       - name: Build
         uses: ./.github/actions/run-maven
         with:
-          action: "package"
-
-      - name: Check filename
-        id: check_filename
-        run: |
-          cd target
-          echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV
+          action: "compile"
 
       - name: Run tests
         uses: ./.github/actions/run-maven
         with:
           action: "test"
+
+      - name: Check filename
+        id: check_filename
+        run: |
+          cd target
+          echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV    
 
     outputs:
       filename: ${{ env.FILENAME }}
