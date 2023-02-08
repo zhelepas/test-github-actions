@@ -34,13 +34,13 @@ jobs:
         run: |
           cd target
           filename="$(ls *.jar)"
-          echo 'FILENAME=$filename' >> $GITHUB_OUTPUT
+          echo 'FILENAME=${{ filename }}' >> $GITHUB_ENV
           echo $filename
 
       - name: Run Tests
         id: test
         run: |
-          echo '${{ steps.check_filename.outputs.filename }}'
+          echo '${{ env.FILENAME }}'
           mvn clean test
 
   print-status:
