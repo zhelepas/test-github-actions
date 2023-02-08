@@ -21,11 +21,11 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v3.2.0
 
-      - name: Set up JDK ${{ matrix.java }}
+      - name: Set up JDK ${{ matrix.jdk_version }}
         id: setup_jdk
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.jdk_version }}
           distribution: 'temurin'
           cache: maven
 
