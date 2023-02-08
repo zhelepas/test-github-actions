@@ -35,7 +35,7 @@ jobs:
           cd target
           echo 'FILENAME="$(ls *.jar)"' >> $GITHUB_OUTPUT
           filename="$(ls *.jar)"
-          echo filename
+          echo $filename
 
       - name: Run Tests
         id: test
