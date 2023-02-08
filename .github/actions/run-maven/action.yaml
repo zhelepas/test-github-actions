@@ -1,0 +1,14 @@
+name: 'Build-Module'
+description: 'Action to build a module'
+inputs:
+  action:
+    description: 'required maven action for e.g. package or install'
+    required: true
+runs:
+  using: "composite"
+  steps:
+
+    - name: Build
+      id: build
+      run: mvn ${{ inputs.action }}
+      shell: bash
