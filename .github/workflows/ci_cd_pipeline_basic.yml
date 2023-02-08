@@ -29,7 +29,8 @@ jobs:
 
       - name: Check filename
         run: |
-          file="$(ls target/*.jar)"
+          cd target
+          file="$(ls *.jar)"
           echo $file
 
       - name: Run Tests
