@@ -1,0 +1,28 @@
+name: CI/CD Pipeline
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+
+  # Job build
+  build:
+    name: Build and Test the service
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jdk_version: [ '8', '11' ]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3.2.0
+
+      - name: Set up JDK ${{ matrix.jdk_version }}
+        id: setup_jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.jdk_version }}
+          distribution: 'temurin'
+          cache: maven
+
+      # other steps..
