@@ -33,8 +33,8 @@ jobs:
         id: check_filename
         run: |
           cd target
-          echo 'FILENAME="$(ls *.jar)"' >> $GITHUB_OUTPUT
           filename="$(ls *.jar)"
+          echo 'FILENAME=$filename' >> $GITHUB_OUTPUT
           echo $filename
 
       - name: Run Tests
