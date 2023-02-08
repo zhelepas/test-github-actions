@@ -33,12 +33,15 @@ jobs:
         id: check_filename
         run: |
           cd target
-          echo 'filename="$(ls *.jar)"' >> $GITHUB_OUTPUT
+          echo 'FILENAME="$(ls *.jar)"' >> $GITHUB_OUTPUT
+          filename="$(ls *.jar)"
           echo filename
 
       - name: Run Tests
         id: test
-        run: mvn clean test
+        run: |
+          echo '${{ steps.check_filename.outputs.filename }}'
+          mvn clean test
 
   print-status:
     name: Printing Status
