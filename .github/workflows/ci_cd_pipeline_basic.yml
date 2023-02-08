@@ -33,8 +33,7 @@ jobs:
         id: check_filename
         run: |
           cd target
-          filename="$(ls *.jar)"
-          echo "FILENAME=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
+          echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV
 
       - name: Run Tests
         id: test
