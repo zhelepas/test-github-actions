@@ -34,8 +34,7 @@ jobs:
         run: |
           cd target
           filename="$(ls *.jar)"
-          echo 'FILENAME=$filename' >> $GITHUB_ENV
-          echo $filename
+          echo 'FILENAME=$(echo $filename)' >> $GITHUB_ENV
 
       - name: Run Tests
         id: test
