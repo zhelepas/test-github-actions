@@ -39,6 +39,9 @@ jobs:
         id: test
         run: |
           mvn clean test
+    outputs:
+      filename: ${{ env.FILENAME }}
+
 
   print-status:
     name: Printing Status
@@ -49,4 +52,4 @@ jobs:
         uses: actions/checkout@v3.2.0
 
       - name: Print Status
-        run: echo '${{ env.FILENAME }}'
+        run: echo '${{ needs.build-job.outputs.filename }}'
