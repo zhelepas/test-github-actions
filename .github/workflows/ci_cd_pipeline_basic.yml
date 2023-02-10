@@ -32,25 +32,15 @@ jobs:
 
       - name: Run Tests
         id: test
+        if: ${{ always() }}
         run: |
           mvn clean test
 
-      - name: Check filename
-        id: check_filename
-        run: |
-          cd target
-          echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV
-    outputs:
-      filename: ${{ env.FILENAME }}
-
-  # Job print-status
-  print-status:
-    name: Printing jar file name
+  # Job print-message
+  print-message:
+    name: Printing message
     runs-on: ubuntu-latest
-    needs: [build]
     steps:
-      - name: Git checkout
-        uses: actions/checkout@v3.2.0
 
-      - name: Print file name
-        run: echo '${{ needs.build.outputs.filename }}'
+      - name: Print message
+        run: echo 'Test message'
