@@ -32,11 +32,16 @@ jobs:
         with:
           action: "test"
 
-      - name: Check filename
-        id: check_filename
+      - name: Save filename
+        id: save_filename
         run: |
           cd target
           echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV
+          echo "Jar file ${{ env.FILENAME }} was created" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check filename
+        id: check_filename
+        run: |
           echo "Jar file ${{ env.FILENAME }} was created" >> $GITHUB_STEP_SUMMARY
 
     outputs:
@@ -52,4 +57,4 @@ jobs:
         uses: actions/checkout@v3.2.0
 
       - name: Print file name
-        run: echo '${{ needs.build.outputs.filename }}'
+        run: echo '${{ env.FILENAME }}'
