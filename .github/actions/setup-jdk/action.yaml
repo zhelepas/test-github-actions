@@ -1,0 +1,13 @@
+name: 'Setup Jdk'
+description: 'Action to setup jdk'
+runs:
+  using: "composite"
+  steps:
+
+    - name: Set up JDK
+      id: setup_jdk
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
