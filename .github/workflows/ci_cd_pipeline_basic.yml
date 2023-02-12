@@ -11,7 +11,7 @@ on:
 jobs:
 
   # Job build
-  build:
+  name:
     name: Build and Test the service
     runs-on: ubuntu-latest
     steps:
