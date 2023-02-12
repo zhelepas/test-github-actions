@@ -36,7 +36,8 @@ jobs:
         id: check_filename
         run: |
           cd target
-          echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV    
+          echo "FILENAME=$(ls *.jar)" >> $GITHUB_ENV
+          echo "Jar file ${{ env.FILENAME }} was created" >> $GITHUB_STEP_SUMMARY
 
     outputs:
       filename: ${{ env.FILENAME }}
