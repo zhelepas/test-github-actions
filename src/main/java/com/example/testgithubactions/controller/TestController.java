@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping
-    public ResponseEntity<String> test() {
+    public ResponseEntit<String> test() {
 
         final var testVar = "Test Var";
 
