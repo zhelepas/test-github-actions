@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "develop" ]
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
@@ -10,39 +10,48 @@ on:
 
 jobs:
 
-  # Job build
-  build:
-    name: Build and Test the service
+  print-branch-name:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Git checkout
-        uses: actions/checkout@v3.2.0
+      - name: Get branch name
+        run: echo "The target branch is $GITHUB_REF"
 
-      - name: Set up JDK
-        id: setup_jdk
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
-
-      - name: Build
-        id: build
-        run: mvn -B package --file pom.xml
-
-      - name: Run Tests
-        id: test
-        if: ${{ always() }}
-        run: |
-          mvn clean test
-
-  # Job print-message
-  print-message:
-    name: Printing message
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-
-      - name: Print message
-        run: echo 'Test message'
+#  # Job build
+#  build:
+#    name: Build and Test the service
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - name: Git checkout
+#        uses: actions/checkout@v3.2.0
+#
+#      - name: Set up JDK
+#        id: setup_jdk
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '11'
+#          distribution: 'temurin'
+#          cache: maven
+#
+#      - name: Build
+#        id: build
+#        run: mvn -B package --file pom.xml
+#
+#      - name: Run Tests
+#        id: test
+#        if: ${{ always() }}
+#        run: |
+#          mvn clean test
+#
+#  # Job print-message
+#  print-message:
+#    name: Printing message
+#    runs-on: ubuntu-latest
+#    needs: [build]
+#    steps:
+#
+#      - name: Print message
+#        run: echo 'Test message'
