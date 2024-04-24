@@ -37,7 +37,7 @@ jobs:
         run: gulp -v
 
       - name: Check installed gulp version before gulp install
-        run: npm list
+        run: npm list -g
 
 
 #  # Job build
