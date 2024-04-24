@@ -34,9 +34,6 @@ jobs:
         run: npm install -g gulp@4.0.0
 
       - name: Check installed gulp version
-        run: npm list gulp
-
-      - name: Check installed gulp version
         run: gulp -v
 
       - name: Check installed gulp version before gulp install
