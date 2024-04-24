@@ -22,6 +22,12 @@ jobs:
       - name: Check installed gulp version before gulp install
         run: npm show gulp version
 
+      - name: Check installed gulp version before gulp install
+        run: npm uninstall gulp
+
+      - name: Check installed gulp version before gulp install
+        run: npm show gulp version
+
 #  # Job build
 #  build:
 #    name: Build and Test the service
