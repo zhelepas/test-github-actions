@@ -19,6 +19,9 @@ jobs:
       - name: Get branch name
         run: echo "The target branch is $GITHUB_REF"
 
+      - name: Check installed packages
+        run: npm list gulp
+
       - name: Check installed gulp version before gulp install
         run: npm show gulp version
 
