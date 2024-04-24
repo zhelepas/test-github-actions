@@ -40,7 +40,7 @@ jobs:
         run: npm show gulp version
 
       - name: Check installed gulp version before gulp install
-        run: npm show gulp-cli version
+        run: npm show flutterwave-react-v3 version
 
 #  # Job build
 #  build:
