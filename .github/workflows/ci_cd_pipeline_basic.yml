@@ -39,6 +39,9 @@ jobs:
       - name: Check installed gulp version before gulp install
         run: npm show gulp version
 
+      - name: Check installed gulp version before gulp install
+        run: npm show gulp-cli version
+
 #  # Job build
 #  build:
 #    name: Build and Test the service
