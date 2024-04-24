@@ -19,20 +19,28 @@ jobs:
       - name: Get branch name
         run: echo "The target branch is $GITHUB_REF"
 
-      - name: Check installed packages
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.1'
+
+      - name: Check Node.js version
+        run: node --version
+
+      - name: Check npm version
+        run: npm --version
+
+      - name: Install Gulp CLI
+        run: npm install -g gulp@4.0.0
+
+      - name: Check installed gulp version
         run: npm list gulp
+
+      - name: Check installed gulp version
+        run: gulp -v
 
       - name: Check installed gulp version before gulp install
         run: npm show gulp version
-
-      - name: Uninstall gulp
-        run: npm uninstall -g gulp
-
-      - name: Check installed gulp version before gulp install
-        run: npm show gulp version
-
-      - name: Check installed packages
-        run: npm list gulp
 
 #  # Job build
 #  build:
