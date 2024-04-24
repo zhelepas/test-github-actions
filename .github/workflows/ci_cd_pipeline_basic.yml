@@ -22,8 +22,8 @@ jobs:
       - name: Check installed gulp version before gulp install
         run: npm show gulp version
 
-      - name: Check installed gulp version before gulp install
-        run: npm uninstall gulp
+      - name: Uninstall gulp
+        run: npm uninstall -g gulp
 
       - name: Check installed gulp version before gulp install
         run: npm show gulp version
