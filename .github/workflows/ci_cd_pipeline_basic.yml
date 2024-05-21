@@ -6,7 +6,48 @@ on:
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
+    inputs:
+      containerRef:
+        description: 'Branch, tag or commit SHA1 to create a container from'
+        required: true
+        type: string
+        default: development
 
+      module:
+        description: 'What module to build'
+        required: true
+        type: choice
+        options:
+          - admin_ui
+          - audi_build_to_order_adapter_service
+          - build_to_order_service
+          - carts_service
+          - config_service
+          - documents_service
+          - event_mediator_service
+          - feature_flags_service
+          - financial_products_service
+          - financial_contract_service
+          - fulfillment_adapter_service
+          - fulfillment_service
+          - generic_order_service
+          - git_config_service
+          - merchants_service
+          - messaging_service
+          - mock_rest_service
+          - orders_service
+          - payments_service
+          - pdf_service
+          - price_handling_service
+          - products_service
+          - pseudonymization_service
+          - products_import_service
+          - reporting_service
+          - vehicle_presentation_service
+
+      tags:
+        description: 'List of comma separated additional tags to generate the container image with'
+        type: string
 
 jobs:
 
