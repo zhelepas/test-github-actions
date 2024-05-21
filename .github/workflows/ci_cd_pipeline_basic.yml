@@ -1,48 +1,121 @@
 name: CI/CD Pipeline
+run-name: "CI/CD Pipeline ${{ inputs.module }}:${{ inputs.containerRef }}"
+
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+#  push:
+#    branches: [ "master", "develop" ]
+#  pull_request:
+#    branches: [ "master" ]
   workflow_dispatch:
+    inputs:
+      containerRef:
+        description: 'Branch, tag or commit SHA1 to create a container from'
+        required: true
+        type: string
+        default: development
 
+      module:
+        description: 'What module to build'
+        required: true
+        type: choice
+        options:
+          - admin_ui
+          - audi_build_to_order_adapter_service
+          - build_to_order_service
+          - carts_service
+          - config_service
+          - documents_service
+          - event_mediator_service
+          - feature_flags_service
+          - financial_products_service
+          - financial_contract_service
+          - fulfillment_adapter_service
+          - fulfillment_service
+          - generic_order_service
+          - git_config_service
+          - merchants_service
+          - messaging_service
+          - mock_rest_service
+          - orders_service
+          - payments_service
+          - pdf_service
+          - price_handling_service
+          - products_service
+          - pseudonymization_service
+          - products_import_service
+          - reporting_service
+          - vehicle_presentation_service
+
+      tags:
+        description: 'List of comma separated additional tags to generate the container image with'
+        type: string
 
 jobs:
 
-  # Job build
-  build:
-    name: Build and Test the service
+  print-branch-name:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Git checkout
-        uses: actions/checkout@v3.2.0
+      - name: Get branch name
+        run: echo "The target branch is $GITHUB_REF"
 
-      - name: Set up JDK
-        id: setup_jdk
-        uses: actions/setup-java@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
+          node-version: '20.11.1'
 
-      - name: Build
-        id: build
-        run: mvn -B package --file pom.xml
+      - name: Check Node.js version
+        run: node --version
 
-      - name: Run Tests
-        id: test
-        if: ${{ always() }}
-        run: |
-          mvn clean test
+      - name: Check npm version
+        run: npm --version
 
-  # Job print-message
-  print-message:
-    name: Printing message
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
+      - name: Install Gulp CLI
+        run: npm install -g gulp@4.0.0
 
-      - name: Print message
-        run: echo 'Test message'
+      - name: Check installed gulp version
+        run: gulp -v
+
+      - name: Check installed gulp version before gulp install
+        run: npm list -g
+
+
+#  # Job build
+#  build:
+#    name: Build and Test the service
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - name: Git checkout
+#        uses: actions/checkout@v3.2.0
+#
+#      - name: Set up JDK
+#        id: setup_jdk
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '11'
+#          distribution: 'temurin'
+#          cache: maven
+#
+#      - name: Build
+#        id: build
+#        run: mvn -B package --file pom.xml
+#
+#      - name: Run Tests
+#        id: test
+#        if: ${{ always() }}
+#        run: |
+#          mvn clean test
+#
+#  # Job print-message
+#  print-message:
+#    name: Printing message
+#    runs-on: ubuntu-latest
+#    needs: [build]
+#    steps:
+#
+#      - name: Print message
+#        run: echo 'Test message'
