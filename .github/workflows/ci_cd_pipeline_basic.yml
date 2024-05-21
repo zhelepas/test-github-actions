@@ -1,5 +1,5 @@
 name: CI/CD Pipeline
-run-name: "CI/CD Pipeline ${{ inputs.module }}:${{ inputs.containerRef }}"
+run-name: "CI/CD Pipeline - ${{ inputs.module }}:${{ inputs.containerRef }}"
 
 
 on:
